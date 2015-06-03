@@ -12,10 +12,18 @@ Plug 'sheerun/vimrc'
 Plug 'jagtesh/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
 
 " Load other plugins
 
 call plug#end()
 
 " Define maps for your plugins
-nnoremap <Leader>o :CtrlP<CR> 
+" nnoremap <Leader>o :CtrlP<CR>
+noremap <F2> :NERDTreeToggle<CR>
+noremap <Leader>[ :NERDTreeToggle<CR>
+
+
+" Use jk/kj to quickly escape from insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
