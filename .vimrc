@@ -22,6 +22,8 @@ call plug#end()
 " nnoremap <Leader>o :CtrlP<CR>
 noremap <F2> :NERDTreeToggle<CR>
 noremap <Leader>[ :NERDTreeToggle<CR>
+" Hide the highlighting when backspace is pressed
+noremap <Backspace> :noh<CR>
 
 
 " Use jk/kj to quickly escape from insert mode
