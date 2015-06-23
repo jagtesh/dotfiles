@@ -13,6 +13,9 @@ Plug 'jagtesh/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " Load other plugins
 
@@ -24,6 +27,8 @@ noremap <F2> :NERDTreeToggle<CR>
 noremap <Leader>[ :NERDTreeToggle<CR>
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
+noremap <Left> :bprev<CR>
+noremap <Right> :bnext<CR>
 
 
 " Use jk/kj to quickly escape from insert mode
