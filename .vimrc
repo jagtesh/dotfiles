@@ -14,8 +14,25 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Enable tabline and make tweaks to vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:aurline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ''
+let g:aurline#extensions#tabline#right_alt_sep = '|'
+
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+
+let g:airline_detect_paste = 1
+
+
+" Show the buffer number in vim-airline tabline
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Load other plugins
 

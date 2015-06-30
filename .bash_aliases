@@ -112,6 +112,6 @@ fi)'
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-export TERM='screen-256color'
+export TERM='xterm-256color'
 
 alias rex='rbenv exec'
