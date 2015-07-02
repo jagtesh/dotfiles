@@ -112,6 +112,15 @@ fi)'
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-export TERM='xterm-256color'
+export TERM='screen-256color'
+export EDITOR='kak'
+export GIT_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+# Set the ssh-agent; need this for accessing keys across tunnels
+if [ -z $(pgrep ssh-agent) ]; then
+  eval $(ssh-agent)
+  ssh-add $HOME/.ssh/id_rsa
+fi
 
 alias rex='rbenv exec'
