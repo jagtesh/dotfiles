@@ -118,6 +118,6 @@ export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
 # Set the ssh-agent; need this for accessing keys across tunnels
-keychain
+eval `keychain --eval id_rsa`
 
 alias rex='rbenv exec'
