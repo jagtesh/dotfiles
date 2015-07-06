@@ -116,6 +116,17 @@ export TERM='screen-256color'
 export EDITOR='kak'
 export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#export GOPATH=/opt/gocode/
+#export PATH=$PATH:~/.nimble/bin
+#export PATH=$PATH:/usr/local/share/gradle-1.11/bin:/usr/local/share/apache-ant-1.9.4/bin
+#export GRADLE_HOME=/usr/local/share/gradle-1.11
+#export JAVA_OPTS='-Xmx2048m -Xss1024k -XX:MaxPermSize=256m'
+#export ANT_OPTS='-Xmx1024m -Xms512m'
+
+export TERM='screen-256color'
 
 # Set the ssh-agent; need this for accessing keys across tunnels
 eval `keychain --eval id_rsa`

@@ -15,6 +15,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
+Plug 'maksimr/vim-jsbeautify'
 
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
@@ -24,18 +26,28 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:aurline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_sep = ''
 let g:aurline#extensions#tabline#right_alt_sep = '|'
-
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-
 let g:airline_detect_paste = 1
-
 
 " Show the buffer number in vim-airline tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" Load other plugins
+" A little hack for vim pane resize support with mouse inside a tmux session
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
 
+" Other NERDTree niceties
+let g:NERDTreeWinSize = 32
+" Force NERDTree to change CWD in VIM when the tree root changes
+let g:NERDTreeChDirMode = 2
+" Force CtrlP to consider the CWD in VIM
+    
+
+" Load other plugins
 call plug#end()
 
 " Define maps for your plugins

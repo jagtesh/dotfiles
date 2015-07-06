@@ -1,0 +1,39 @@
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+export GOPATH=/opt/gocode/
+export PATH=$PATH:~/.nimble/bin
+
+export PATH=$PATH:/usr/local/share/gradle-1.11/bin:/usr/local/share/apache-ant-1.9.4/bin
+export GRADLE_HOME=/usr/local/share/gradle-1.11
+export JAVA_OPTS='-Xmx2048m -Xss1024k -XX:MaxPermSize=256m'
+export ANT_OPTS='-Xmx1024m -Xms512m'
+
+PS1="[\u@ \w\$(git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/{\1}/')]\$ "
+# Step 3: make it pretty (Optional)
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+function prompt {
+    local NONE="\[\033[0m\]"
+    local LIGHT_GREY="\[\033[0;37m\]"
+    local RED="\[\033[0;31m\]"
+    local GREEN="\[\033[0;32m\]"
+    local YELLOW="\[\033[0;33m\]"
+    local BLUE="\[\033[0;34m\]"
+    local PURPLE="\[\033[0;35m\]"
+    local LIGHT_BLUE="\[\033[0;36m\]"
+    case $TERM in
+        xterm*)
+            local TITLEBAR='\[\033]0;\W\007\]'
+            ;;
+        *)
+            local TITLEBAR=""
+            ;;
+    esac
+    PS1="${TITLEBAR}$PURPLE\u@`hostname`:$BLUE\w$GREEN \$(parse_git_branch)$NONE\n# "
+}
+prompt
+
+export TERM='screen-256color'
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
