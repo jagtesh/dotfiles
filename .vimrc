@@ -18,6 +18,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'maksimr/vim-jsbeautify'
 
+" This is non minimal
+Plug 'shougo/unite.vim'
+
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " Enable tabline and make tweaks to vim-airline
@@ -58,6 +61,7 @@ noremap <Leader>[ :NERDTreeToggle<CR>
 noremap <Backspace> :noh<CR>
 noremap <Left> :bprev<CR>
 noremap <Right> :bnext<CR>
+noremap <C-g> :bd<CR>
 
 
 " Use jk/kj to quickly escape from insert mode
