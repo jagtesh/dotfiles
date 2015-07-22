@@ -113,11 +113,11 @@ export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 export TERM='screen-256color'
-export EDITOR='kak'
+export EDITOR='nano'
 export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scripting
 
 #export GOPATH=/opt/gocode/
 #export PATH=$PATH:~/.nimble/bin

@@ -1,0 +1,6 @@
+[user]
+	email = jagtesh@gmail.com
+	name = Jagtesh Chadha
+
+[alias]
+  tree = log --graph --abbrev-commit --pretty=format:'%d' --branches --tags
