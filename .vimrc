@@ -28,6 +28,7 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'bling/vim-bufferline'
+Plug 'joeytwiddle/sexy_scroller.vim'
 
 " This is non minimal
 "Plug 'shougo/unite.vim'
