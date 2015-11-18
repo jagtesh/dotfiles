@@ -12,6 +12,8 @@ let g:mapleader = ","
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set fileencodings=utf-8
+set t_Co=256
+colo smyck 
 
 call plug#begin()
 

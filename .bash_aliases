@@ -5,6 +5,14 @@
 #  Bunch-o-predefined colors.  Makes reading code easier than escape sequences.
 #  I don't remember where I found this.  o_O
 
+OS=$(uname -s)
+if [[ $OS == 'Darwin' ]]; then
+  BrewDir='/usr/local'
+  source ~/Repos/dotfiles/git-prompt.sh
+else
+  BrewDir='$HOME/.linuxbrew'
+fi
+
 # Reset
 Color_Off="\[\033[0m\]"       # Text Reset
 
@@ -90,33 +98,42 @@ Jobs="\j"
 # This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
 # I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
 
+DisplayPath=" $BWhite$PathShort"
+
 export PS1=$IBlack$Time12a$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
     # @4 - Clean repository - nothing to commit
-    echo "'$Green'"$(__git_ps1 " (%s)"); \
+    echo "'$DisplayPath$Green'"$(__git_ps1 " (%s)"); \
   else \
     # @5 - Changes to working tree
-    echo "'$IRed'"$(__git_ps1 " {%s}"); \
-  fi) '$BWhite$PathShort$Color_Off'\$ "; \
+    echo "'$DisplayPath$IRed'"$(__git_ps1 " {%s}"); \
+  fi) '$Color_Off$NewLine'\$ "; \
 else \
   # @2 - Prompt when not in GIT repo
-  echo " '$BWhite$PathShort$Color_Off'\$ "; \
+  echo "'$DisplayPath$Color_Off$NewLine'\$ "; \
 fi)'
 
 
 #####################################################################
 # Other customizations, eg. setting the PATH etc.
 #####################################################################
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-export TERM='screen-256color'
+export PATH="$BrewDir/bin:$PATH"
+export MANPATH="$BrewDir/share/man:$MANPATH"
+export INFOPATH="$BrewDir/share/info:$INFOPATH"
+if [[ $OS == 'Darwin' ]]; then
+  export TERM='xterm-256color'
+else
+  export TERM='screen-256color'
+fi
 export EDITOR='nano'
 export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
-export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+if [[ $OS != 'Darwin' ]]; then
+#  export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  export SSL_CERT_FILE='/usr/local/etc/openssl/cert.pem'
+fi
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scripting
 
 #export GOPATH=/opt/gocode/
@@ -126,9 +143,15 @@ export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scriptin
 #export JAVA_OPTS='-Xmx2048m -Xss1024k -XX:MaxPermSize=256m'
 #export ANT_OPTS='-Xmx1024m -Xms512m'
 
-export TERM='screen-256color'
-
 # Set the ssh-agent; need this for accessing keys across tunnels
-eval `keychain --eval id_rsa`
+#if [[ $OS != 'Darwin' ]]; then
+  eval `keychain --eval id_rsa`
+#fi
 
 alias rex='rbenv exec'
+
+# Enable syntax colouring on Darwin
+if [[ $OS == 'Darwin' ]]; then
+  alias ls='ls -G'
+  #export PATH=/usr/local/Cellar/openssl/1.0.2d_1/bin:$PATH
+fi
