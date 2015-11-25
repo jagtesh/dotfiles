@@ -13,7 +13,6 @@ let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set fileencodings=utf-8
 set t_Co=256
-colo smyck 
 
 call plug#begin()
 
@@ -75,6 +74,10 @@ let g:NERDTreeChDirMode = 2
 
 " Load other plugins
 call plug#end()
+
+
+
+colo smyck
 
 " A few GUI options here
 if has("gui_running")
