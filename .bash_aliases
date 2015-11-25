@@ -122,11 +122,11 @@ fi)'
 export PATH="$BrewDir/bin:$PATH"
 export MANPATH="$BrewDir/share/man:$MANPATH"
 export INFOPATH="$BrewDir/share/info:$INFOPATH"
-if [[ $OS == 'Darwin' ]]; then
-  export TERM='xterm-256color'
-else
-  export TERM='screen-256color'
-fi
+#if [[ $OS == 'Darwin' ]]; then
+#  export TERM='xterm-256color'
+#else
+#  export TERM='screen-256color'
+#fi
 export EDITOR='nano'
 export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
