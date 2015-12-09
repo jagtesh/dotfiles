@@ -6,9 +6,10 @@
 #  I don't remember where I found this.  o_O
 
 OS=$(uname -s)
+
 if [[ $OS == 'Darwin' ]]; then
   BrewDir='/usr/local'
-  source ~/Repos/dotfiles/git-prompt.sh
+  source $HOME/Repos/dotfiles/git-prompt.sh
 else
   BrewDir='$HOME/.linuxbrew'
 fi
