@@ -17,7 +17,7 @@ set t_Co=256
 call plug#begin()
 
 Plug 'sheerun/vimrc'
-Plug 'jagtesh/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
