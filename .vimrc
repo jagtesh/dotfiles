@@ -5,12 +5,18 @@
 set nocompatible
 set autoindent
 set backspace=indent,eol,start
+" Unify the clipboard between tmux and vim
+set clipboard=unnamed
 
 " Select your Leader key
 let mapleader = ","
 let g:mapleader = ","
 let g:airline_powerline_fonts = 1
-set encoding=utf-8
+
+if !has('nvim')
+  set encoding=utf-8
+endif
+
 set fileencodings=utf-8
 set t_Co=256
 
@@ -21,7 +27,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
-"Plug 'jagtesh/nerdtree' "supports arrow glyphs in a wider range of fonts
 Plug 'kien/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
@@ -29,8 +34,9 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bling/vim-bufferline'
-"Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'lyip1992/smyck-vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-fugitive'
 
 " This is non minimal
 "Plug 'shougo/unite.vim'
@@ -71,25 +77,16 @@ let g:NERDTreeChDirMode = 2
 "unlet g:ctrlp_user_command
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'find %s -type f']
 
-
 " Load other plugins
 call plug#end()
 
-
-
 colo smyck
-
-" A few GUI options here
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Inconsolata-dz\ for\ Powerline\ 14
-  endif
-endif
 
 " Define maps for your plugins
 " nnoremap <Leader>o :CtrlP<CR>
 noremap <F2> :NERDTreeToggle<cr>
 noremap <Leader>[ :NERDTreeToggle<CR>
+
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
 noremap <Left> :bprev<CR>
@@ -100,6 +97,10 @@ noremap <Leader>r :vertical resize 32<CR>
 noremap zz :wq<CR>
 
 
-" Use jk/kj to quickly escape from insert mode
-inoremap jk <Esc>l
-inoremap kj <Esc>l
+" Use jk/kj to quickly escape from insert mode, space at end keeps charecter 
+" in same position
+inoremap jk <Esc> " extra space at end
+inoremap kj <Esc> " extra space at end
+ 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %

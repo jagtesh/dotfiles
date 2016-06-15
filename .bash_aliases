@@ -136,8 +136,13 @@ if [[ $OS != 'Darwin' ]]; then
   export SSL_CERT_FILE='/usr/local/etc/openssl/cert.pem'
 fi
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scripting
+if [[ $OS == 'Darwin' ]]; then
+  PATH="$PATH:/Users/jagtesh/Repos/Nim/bin"
+fi
 
-#export GOPATH=/opt/gocode/
+export GOPATH=~/gocode/
+export PATH=$PATH:$GOPATH/bin
+
 #export PATH=$PATH:~/.nimble/bin
 #export PATH=$PATH:/usr/local/share/gradle-1.11/bin:/usr/local/share/apache-ant-1.9.4/bin
 #export GRADLE_HOME=/usr/local/share/gradle-1.11
@@ -150,9 +155,32 @@ export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scriptin
 #fi
 
 alias rex='rbenv exec'
+alias g='git'
+alias ga='git add'
+alias grm='git rm'
+alias gre='git reset'
+alias gc='git commit'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias gs='git status'
+alias gl='git log'
+alias glf='git log --all --graph --decorate --oneline --simplify-by-decoration'
+alias gpl='git pull'
+alias gps='git push'
 
 # Enable syntax colouring on Darwin
 if [[ $OS == 'Darwin' ]]; then
   alias ls='ls -G'
   #export PATH=/usr/local/Cellar/openssl/1.0.2d_1/bin:$PATH
 fi
+
+#eval $(docker-machine env default)
+#eval $(dinghy shellinit)
+#KUBERNETES_PROVIDER=vagrant
+
+# NVM stuff
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+
+# For proper SymPy support
+export PYTHONIOENCODING=utf-8
