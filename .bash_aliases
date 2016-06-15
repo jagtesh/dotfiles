@@ -9,9 +9,12 @@ OS=$(uname -s)
 
 if [[ $OS == 'Darwin' ]]; then
   BrewDir='/usr/local'
-  source $HOME/Repos/dotfiles/git-prompt.sh
 else
   BrewDir='$HOME/.linuxbrew'
+fi
+
+if [[ -z "$(type -t __git_ps1)" ]]; then 
+  source $HOME/Repos/dotfiles/git-prompt.sh
 fi
 
 # Reset
