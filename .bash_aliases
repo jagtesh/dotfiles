@@ -187,3 +187,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # For proper SymPy support
 export PYTHONIOENCODING=utf-8
+
+# For nvim
+# Fix the Ctrl-H code in terminfo
+if [[ ! -e ~/.tic/$TERM.ti ]]; then
+  mkdir -p ~/.tic
+  infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.tic/$TERM.ti
+  tic ~/.tic/$TERM.ti
+fi

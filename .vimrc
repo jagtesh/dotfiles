@@ -36,7 +36,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bling/vim-bufferline'
 Plug 'lyip1992/smyck-vim'
 Plug 'rking/ag.vim'
-Plug 'tpope/vim-fugitive'
 
 " This is non minimal
 "Plug 'shougo/unite.vim'
