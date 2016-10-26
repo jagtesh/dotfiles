@@ -7,6 +7,8 @@ set autoindent
 set backspace=indent,eol,start
 " Unify the clipboard between tmux and vim
 set clipboard=unnamed
+set number
+set laststatus=2
 
 " Select your Leader key
 let mapleader = ","
@@ -19,6 +21,9 @@ endif
 
 set fileencodings=utf-8
 set t_Co=256
+
+" Simple fix for tabs in Makefile
+autocmd FileType make setlocal noexpandtab
 
 call plug#begin()
 
@@ -36,6 +41,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bling/vim-bufferline'
 Plug 'lyip1992/smyck-vim'
 Plug 'rking/ag.vim'
+"Plug 'NLKNguyen/papercolor-theme'
+Plug 'scrooloose/nerdcommenter'
 
 " This is non minimal
 "Plug 'shougo/unite.vim'
@@ -79,7 +86,7 @@ let g:NERDTreeChDirMode = 2
 " Load other plugins
 call plug#end()
 
-colo smyck
+colo wombat256mod
 
 " Define maps for your plugins
 " nnoremap <Leader>o :CtrlP<CR>

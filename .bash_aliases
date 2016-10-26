@@ -146,6 +146,9 @@ fi
 export GOPATH=~/gocode/
 export PATH=$PATH:$GOPATH/bin
 
+# For elixir versioning
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
 #export PATH=$PATH:~/.nimble/bin
 #export PATH=$PATH:/usr/local/share/gradle-1.11/bin:/usr/local/share/apache-ant-1.9.4/bin
 #export GRADLE_HOME=/usr/local/share/gradle-1.11
@@ -195,3 +198,15 @@ if [[ ! -e ~/.tic/$TERM.ti ]]; then
   infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.tic/$TERM.ti
   tic ~/.tic/$TERM.ti
 fi
+
+# Coloured man pages
+man() {
+	env \
+		LESS_TERMCAP_md=$'\e[1;36m' \
+		LESS_TERMCAP_me=$'\e[0m' \
+		LESS_TERMCAP_se=$'\e[0m' \
+		LESS_TERMCAP_so=$'\e[1;40;92m' \
+		LESS_TERMCAP_ue=$'\e[0m' \
+		LESS_TERMCAP_us=$'\e[1;32m' \
+			man "$@"
+}
