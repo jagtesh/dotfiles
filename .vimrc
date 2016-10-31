@@ -21,6 +21,10 @@ endif
 
 set fileencodings=utf-8
 set t_Co=256
+if has("gui_vimr")
+  set termguicolors
+  set title
+endif
 
 " Simple fix for tabs in Makefile
 autocmd FileType make setlocal noexpandtab
@@ -95,13 +99,12 @@ noremap <Leader>[ :NERDTreeToggle<CR>
 
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
-noremap <Left> :bprev<CR>
-noremap <Right> :bnext<CR>
+noremap <Left> :tabprevious<CR>
+noremap <Right> :tabnext<CR>
 noremap <C-g> :bd<CR>
 noremap <Leader>w :w<CR>
 noremap <Leader>r :vertical resize 32<CR>
 noremap zz :wq<CR>
-
 
 " Use jk/kj to quickly escape from insert mode, space at end keeps charecter 
 " in same position
@@ -110,3 +113,8 @@ inoremap kj <Esc> " extra space at end
  
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" Custom vim commands
+command Tc tabclose
+command Tn tabnext
+command Tb tabprevious
