@@ -163,6 +163,7 @@ test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 alias rex='rbenv exec'
 alias g='git'
 alias ga='git add'
+alias gap='git add . -p'
 alias grm='git rm'
 alias gre='git reset'
 alias gc='git commit'
@@ -173,6 +174,7 @@ alias gl='git log'
 alias glf='git log --all --graph --decorate --oneline --simplify-by-decoration'
 alias gpl='git pull'
 alias gps='git push'
+alias gd='git diff'
 
 # Enable syntax colouring on Darwin
 if [[ $OS == 'Darwin' ]]; then

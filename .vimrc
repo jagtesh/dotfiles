@@ -5,14 +5,15 @@
 set nocompatible
 set autoindent
 set backspace=indent,eol,start
-" Unify the clipboard between tmux and vim
+
+" Unify the clipboard between tmux, vim and OS
 set clipboard=unnamed
-set number
+set relativenumber
 set laststatus=2
 
 " Select your Leader key
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = " "
+let g:mapleader = " "
 let g:airline_powerline_fonts = 1
 
 if !has('nvim')
@@ -21,9 +22,12 @@ endif
 
 set fileencodings=utf-8
 set t_Co=256
+
+" VimR niceties
 if has("gui_vimr")
   set termguicolors
   set title
+  set foldmethod=syntax
 endif
 
 " Simple fix for tabs in Makefile
@@ -32,25 +36,44 @@ autocmd FileType make setlocal noexpandtab
 call plug#begin()
 
 Plug 'sheerun/vimrc'
-Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
-Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
-Plug 'maksimr/vim-jsbeautify'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'bling/vim-bufferline'
-Plug 'lyip1992/smyck-vim'
 Plug 'rking/ag.vim'
-"Plug 'NLKNguyen/papercolor-theme'
-Plug 'scrooloose/nerdcommenter'
-
-" This is non minimal
-"Plug 'shougo/unite.vim'
+Plug 'tpope/vim-commentary' 
 Plug 'edkolev/tmuxline.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'elixir-lang/vim-elixir'
+Plug 'thinca/vim-ref'
+Plug 'Shougo/neco-vim'
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mxw/vim-jsx'
+Plug 'NLKNguyen/papercolor-theme'
+
+" Disabled plugs
+" Plug 'tacahiroy/ctrlp-funky'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Shougo/denite.vim'
+" Plug 'tpope/vim-vinegar'
+" Plug 'bling/vim-bufferline'
+" Plug 'lyip1992/smyck-vim'
+" Plug 'maksimr/vim-jsbeautify'
+" Plug 'sheerun/vim-polyglot'
+
+" MatchTagAlways options
+let g:mta_filetypes = {
+  \ 'html' : 1,
+  \ 'xhtml' : 1,
+  \ 'xml' : 1,
+  \ 'javascript.jsx' : 1
+  \}
+
 
 " Enable tabline and make tweaks to vim-airline
 if g:airline_powerline_fonts == 0
@@ -79,18 +102,34 @@ endif
 
 " Force NERDTree to change CWD in VIM when the tree root changes
 let g:NERDTreeWinSize = 32
-" Force CtrlP to consider the CWD in VIM
 let g:NERDTreeChDirMode = 2
-" Supposedly super fast Ctrl P that uses git
-"unlet g:ctrlp_custom_ignore
-"let g:ctrlp_user_command = 'find %s -type f'
-"unlet g:ctrlp_user_command
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'find %s -type f']
+" Force CtrlP to consider the CWD in VIM
+let g:ctrlp_working_path_mode = 0
 
-" Load other plugins
+" Turn on omnicomplete
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" Initialize all plugins
+" let g:elixir_autobuild = 1
+" let g:elixir_showerror = 1
+let g:elixir_maxpreviews = 20
+let g:elixir_docpreview = 1
+let g:deoplete#enable_at_startup = 1
+let g:ctrlp_funky_syntax_highlight = 1
+
 call plug#end()
 
-colo wombat256mod
+" Setup folding defaults
+set foldmethod=syntax
+set nofoldenable
+let g:polyglot_disabled = ['elixir']
+"set foldlevelstart=20
+
+" Set the theme and additional color customizations
+" colo wombat256mod
+set background=dark
+colorscheme PaperColor
 
 " Define maps for your plugins
 " nnoremap <Leader>o :CtrlP<CR>
@@ -99,22 +138,19 @@ noremap <Leader>[ :NERDTreeToggle<CR>
 
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
-noremap <Left> :tabprevious<CR>
-noremap <Right> :tabnext<CR>
 noremap <C-g> :bd<CR>
 noremap <Leader>w :w<CR>
 noremap <Leader>r :vertical resize 32<CR>
-noremap zz :wq<CR>
+noremap <Leader>f :NERDTreeFind<CR>
+noremap <C-P> :CtrlPCurWD<CR>
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>tt <Ctrl-w><Ctrl-]><Ctrl-w>T<CR>
+nnoremap <Leader>q :tabclose<CR>
 
-" Use jk/kj to quickly escape from insert mode, space at end keeps charecter 
+" Use jk/kj to quickly escape from insert mode, space at end keeps character
 " in same position
 inoremap jk <Esc> " extra space at end
 inoremap kj <Esc> " extra space at end
  
-" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
-
-" Custom vim commands
-command Tc tabclose
-command Tn tabnext
-command Tb tabprevious
