@@ -13,8 +13,14 @@ else
   BrewDir='$HOME/.linuxbrew'
 fi
 
+# Git prompt support
 if [[ -z "$(type -t __git_ps1)" ]]; then 
   source $HOME/Repos/dotfiles/git-prompt.sh
+fi
+
+# Git command auto-completion support
+if [[ -z "$(type -t __git_commands)" ]]; then
+  source $HOME/Repos/dotfiles/git-completion.sh
 fi
 
 # Reset
@@ -174,6 +180,7 @@ alias gl='git log'
 alias glf='git log --all --graph --decorate --oneline --simplify-by-decoration'
 alias gpl='git pull'
 alias gps='git push'
+alias enhance='function ne() { docker run -v $(PWD)/`dirname $1`:/ne/input -it alexjc/neural-enhance input/`basename $1`; }; ne'
 alias gd='git diff'
 
 # Enable syntax colouring on Darwin

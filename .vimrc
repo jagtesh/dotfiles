@@ -12,8 +12,8 @@ set relativenumber
 set laststatus=2
 
 " Select your Leader key
-let mapleader = " "
-let g:mapleader = " "
+let mapleader = ","
+let g:mapleader = ","
 let g:airline_powerline_fonts = 1
 
 if !has('nvim')
@@ -27,7 +27,6 @@ set t_Co=256
 if has("gui_vimr")
   set termguicolors
   set title
-  set foldmethod=syntax
 endif
 
 " Simple fix for tabs in Makefile
@@ -53,8 +52,12 @@ Plug 'thinca/vim-ref'
 Plug 'Shougo/neco-vim'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'sheerun/vim-polyglot'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'tomasr/molokai'
 
 " Disabled plugs
 " Plug 'tacahiroy/ctrlp-funky'
@@ -64,7 +67,6 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'bling/vim-bufferline'
 " Plug 'lyip1992/smyck-vim'
 " Plug 'maksimr/vim-jsbeautify'
-" Plug 'sheerun/vim-polyglot'
 
 " MatchTagAlways options
 let g:mta_filetypes = {
@@ -123,13 +125,18 @@ call plug#end()
 " Setup folding defaults
 set foldmethod=syntax
 set nofoldenable
-let g:polyglot_disabled = ['elixir']
+let g:polyglot_disabled = ['elixir', 'javascript']
+" Enable JSX support in .js files
+let g:jsx_ext_required = 0
 "set foldlevelstart=20
 
 " Set the theme and additional color customizations
 " colo wombat256mod
 set background=dark
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme molokai
+" Turn off the split border styling (certain themes look ugly with it)
+set fillchars+=vert:\ 
 
 " Define maps for your plugins
 " nnoremap <Leader>o :CtrlP<CR>
@@ -139,11 +146,12 @@ noremap <Leader>[ :NERDTreeToggle<CR>
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
 noremap <C-g> :bd<CR>
-noremap <Leader>w :w<CR>
+noremap <Leader>w :w<CR>m
 noremap <Leader>r :vertical resize 32<CR>
-noremap <Leader>f :NERDTreeFind<CR>
+noremap <Leader>fd :NERDTreeFind<CR>
 noremap <C-P> :CtrlPCurWD<CR>
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>fn :CtrlPFunky<CR>
+nnoremap <Leader>fb :CtrlPBuffer<CR>
 nnoremap <Leader>tt <Ctrl-w><Ctrl-]><Ctrl-w>T<CR>
 nnoremap <Leader>q :tabclose<CR>
 
@@ -151,6 +159,8 @@ nnoremap <Leader>q :tabclose<CR>
 " in same position
 inoremap jk <Esc> " extra space at end
 inoremap kj <Esc> " extra space at end
+inoremap <C-j> <C-N>
+inoremap <C-K> <C-p>
  
 " Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
