@@ -136,7 +136,7 @@ set background=dark
 " colorscheme PaperColor
 colorscheme molokai
 " Enabled Molokai tweaks for 256 colours
-set rehash256 = 1
+let g:rehash256 = 1
 " Turn off the split border styling (certain themes look ugly with it)
 set fillchars+=vert:\ 
 
