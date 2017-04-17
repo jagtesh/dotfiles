@@ -110,6 +110,8 @@ Jobs="\j"
 
 DisplayPath=" $BWhite$PathShort"
 
+# Use this for the hostname
+# export PS1=$IBlack$Time12a$Color_Off\ $USER@$HOSTNAME'$(git branch &>/dev/null;\
 export PS1=$IBlack$Time12a$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \

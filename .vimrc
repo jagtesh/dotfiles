@@ -40,7 +40,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rking/ag.vim'
@@ -50,19 +50,22 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'elixir-lang/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'Shougo/neco-vim'
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'tomasr/molokai'
+" YouCompleteMe
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
+" Plug 'larrylv/ycm-elixir'
 
 " Disabled plugs
-" Plug 'tacahiroy/ctrlp-funky'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 " Plug 'Shougo/denite.vim'
+" Plug 'zchee/deoplete-go', { 'do': 'make' }
 " Plug 'tpope/vim-vinegar'
 " Plug 'bling/vim-bufferline'
 " Plug 'lyip1992/smyck-vim'
@@ -161,8 +164,8 @@ nnoremap <Leader>q :tabclose<CR>
 " in same position
 inoremap jk <Esc> " extra space at end
 inoremap kj <Esc> " extra space at end
-inoremap <C-j> <C-N>
-inoremap <C-K> <C-p>
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
  
 " Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
