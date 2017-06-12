@@ -196,8 +196,12 @@ fi
 #KUBERNETES_PROVIDER=vagrant
 
 # NVM stuff
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
+#export NVM_DIR="$HOME/.nvm"
+#. "$(brew --prefix nvm)/nvm.sh"
+
+# Enable asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 # For proper SymPy support
 export PYTHONIOENCODING=utf-8
