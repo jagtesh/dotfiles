@@ -9,6 +9,7 @@ OS=$(uname -s)
 
 if [[ $OS == 'Darwin' ]]; then
   BrewDir='/usr/local'
+  export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 else
   BrewDir='$HOME/.linuxbrew'
 fi
