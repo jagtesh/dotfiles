@@ -190,7 +190,12 @@ alias gd='git diff'
 if [[ $OS == 'Darwin' ]]; then
   alias ls='ls -G'
   #export PATH=/usr/local/Cellar/openssl/1.0.2d_1/bin:$PATH
+elif [[ -z $(alias | grep ls) ]]; then
+  # assume this is linux
+  # configure the ls alias only if it does not exist
+  alias ls='ls --color'
 fi
+
 
 #eval $(docker-machine env default)
 #eval $(dinghy shellinit)
@@ -200,9 +205,9 @@ fi
 #export NVM_DIR="$HOME/.nvm"
 #. "$(brew --prefix nvm)/nvm.sh"
 
-# Enable asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# Disabled asdf for now; nodejs doesn't work out of the box
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
 
 # For proper SymPy support
 export PYTHONIOENCODING=utf-8

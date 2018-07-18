@@ -14,7 +14,7 @@ set laststatus=2
 " Select your Leader key
 let mapleader = ","
 let g:mapleader = ","
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 if !has('nvim')
   set encoding=utf-8
