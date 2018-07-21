@@ -11,7 +11,7 @@ if [[ $OS == 'Darwin' ]]; then
   BrewDir='/usr/local'
   export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 else
-  BrewDir='$HOME/.linuxbrew'
+  BrewDir="$HOME/.linuxbrew"
 fi
 
 # Git prompt support
