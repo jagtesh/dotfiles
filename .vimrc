@@ -58,7 +58,7 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'tomasr/molokai'
 " YouCompleteMe
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
 " Plug 'larrylv/ycm-elixir'
 
 " Disabled plugs
@@ -94,6 +94,9 @@ endif
 
 " This forces nerdtree-git-plugin to use text icons
 let g:NERDTreeUseSimpleIndicator = 1
+
+" Force tmuxline to not use icons
+let g:tmuxline_powerline_separators = 0
 
 " Show the buffer number in vim-airline tabline
 "let g:airline#extensions#tabline#buffer_nr_show = 1

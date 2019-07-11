@@ -143,10 +143,10 @@ export INFOPATH="$BrewDir/share/info:$INFOPATH"
 export EDITOR='nano'
 export GIT_EDITOR=$EDITOR
 export VISUAL=$EDITOR
-# if [[ $OS != 'Darwin' ]]; then
+#if [[ $OS != 'Darwin' ]]; then
 #  export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-  # export SSL_CERT_FILE='/usr/local/etc/openssl/cert.pem'
-# fi
+#  export SSL_CERT_FILE='/usr/local/etc/openssl/cert.pem'
+#fi
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.npm/bin" # Add RVM to PATH for scripting
 if [[ $OS == 'Darwin' ]]; then
   PATH="$PATH:/Users/jagtesh/Repos/Nim/bin"
