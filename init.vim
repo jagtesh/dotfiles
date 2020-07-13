@@ -19,6 +19,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-commentary' 
 Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'thinca/vim-ref'
 Plug 'Shougo/neco-vim'
 Plug 'pangloss/vim-javascript'
@@ -33,7 +34,6 @@ Plug 'beeender/Comrade'
 " Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 " Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'christoomey/vim-tmux-navigator'
 " Plug 'tpope/vim-fugitive'
 " YouCompleteMe
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
@@ -58,6 +58,7 @@ let g:mta_filetypes = {
 
 
 " Enable tabline and make tweaks to vim-airline
+let g:airline_powerline_fonts = 1 " turns off fancy styles for powerline
 if g:airline_powerline_fonts == 0
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_sep = ''
@@ -106,7 +107,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 call plug#end()
 
 " ### DEFAULTS ###
-" Some may already be covered by plugs above)
+" Some may already be covered by plugs above
 set nocompatible
 set autoindent
 set backspace=indent,eol,start
@@ -124,7 +125,6 @@ set laststatus=2
 " Select your Leader key
 let mapleader = ","
 let g:mapleader = ","
-let g:airline_powerline_fonts = 0
 
 if !has('nvim')
   set encoding=utf-8
