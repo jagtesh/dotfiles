@@ -1,14 +1,23 @@
 " Get Plug first, run the following command:
 " (source: https://github.com/junegunn/vim-plug)
 "
+" For vim:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+"
+" Other dependencies:
+" fuzzy matching: fzf, bat, fd
+" auto-complete : kite
+" file searching: the-silver-searcher
+ 
 " automated plug installation on neovim
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" ===========================
+"    PLUGIN + CONFIGURATION
+" ===========================
 call plug#begin()
 
 Plug 'sheerun/vimrc'
@@ -33,6 +42,8 @@ if g:airline_powerline_fonts == 0 " turns off fancy styles for powerline if enab
 endif
 
 Plug 'scrooloose/nerdtree'
+Plug 'unkiwii/vim-nerdtree-sync'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " This forces nerdtree-git-plugin to use text icons
 let g:NERDTreeUseSimpleIndicator = 0
 " This forces nerdtree-git-plugin to use text icons
@@ -41,7 +52,7 @@ let g:NERDTreeUseSimpleIndicator = 0
 let g:NERDTreeWinSize = 32
 let g:NERDTreeChDirMode = 2
 
-" # All things CtrlP (use fzf instead)
+" # All things CtrlP and Ag (fzf replaces both plugins)
 " Plug 'kien/ctrlp.vim'
 " Plug 'tacahiroy/ctrlp-funky'
 " " Force CtrlP to consider the CWD in VIM
@@ -52,10 +63,9 @@ let g:NERDTreeChDirMode = 2
 "   \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
 "   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
 "   \ }
+" Plug 'rking/ag.vim'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'rking/ag.vim'
 Plug 'tpope/vim-commentary' 
 Plug 'edkolev/tmuxline.vim'
 " Force tmuxline to not use icons
@@ -69,6 +79,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'tomasr/molokai'
 Plug 'beeender/Comrade'
+Plug 'dense-analysis/ale'
 Plug 'Valloric/MatchTagAlways'
 " MatchTagAlways options
 let g:mta_filetypes = {
@@ -83,11 +94,6 @@ let g:mta_filetypes = {
 " brew install fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-noremap <C-p> <Esc><Esc>:Files!<CR>
-noremap <C-b> <Esc><Esc>:BLines!<CR>
-noremap <C-g> <Esc><Esc>:BCommits!<CR>
-" search in the directory of the open file
-nnoremap <C-p><C-o>:call fzf#run({ 'dir': %:p:h })<CR>
 
 " Plug 'elixir-lang/vim-elixir'
 " Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
@@ -114,14 +120,17 @@ nnoremap <C-p><C-o>:call fzf#run({ 'dir': %:p:h })<CR>
 " Plug 'maksimr/vim-jsbeautify'
 
 
+call plug#end()
+
+" ===========================
+"          DEFAULTS
+" ===========================
 " A little hack for vim pane resize support with mouse inside a tmux session
 set mouse+=a
 if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
-
-call plug#end()
 
 " ### DEFAULTS ###
 " Some may already be covered by plugs above
@@ -164,14 +173,6 @@ autocmd FileType make setlocal noexpandtab
 set foldmethod=syntax
 set nofoldenable
 
-" Use jk/kj to quickly escape from insert mode, space at end keeps character
-" in same position
-inoremap jk <Esc> " extra space at end
-inoremap kj <Esc> " extra space at end
-inoremap <C-j> <C-n>
-inoremap <C-k> <C-p>
-
-
 " ### PLUGIN SETTINGS ###
 " [polyglot]
 let g:polyglot_disabled = ['elixir', 'javascript']
@@ -190,32 +191,69 @@ let g:rehash256 = 1
 " Turn off the split border styling (certain themes look ugly with it)
 set fillchars+=vert:\ 
 
-" [nerdtree]
-" Define maps for your plugins
-" nnoremap <Leader>o :CtrlP<CR>
-noremap <F2> :NERDTreeToggle<cr>
-noremap <Leader>[ :NERDTreeToggle<CR>
-noremap <Leader>f :NERDTreeFind<CR>
-
 " [kite]
 let g:kite_supported_languages = ['python', 'javascript', 'go']
 let g:kite_tab_complete=1
+
+
+" ===========================
+"           KEYMAPS
+" ===========================
+
+" Use jk/kj to quickly escape from insert mode, space at end keeps character
+" in same position
+inoremap jk <Esc> " extra space at end
+inoremap kj <Esc> " extra space at end
+" These may have made sense some time ago, now seem confusing :-/
+" inoremap <C-j> <C-n>
+" inoremap <C-k> <C-p>
 
 " [ctrlp]
 " nnoremap <Leader>fn :CtrlPFunky<CR>
 " nnoremap <Leader>fb :CtrlPBuffer<CR>
 " noremap <C-P> :CtrlPCurWD<CR>
 
+" [nerdtree]
+" Define maps for your plugins
+" nnoremap <Leader>o :CtrlP<CR>
+noremap <F2> :NERDTreeToggle<cr>
+" Open NERDTree in current buffer's folder
+noremap <Leader>[ :NERDTreeToggle<CR>
+" Open NERDTree in PWD
+noremap <Leader>] :NERDTreeToggle %<CR>
+noremap <Leader>f :NERDTreeFind<CR>
+
+" [fzf/fuzzy matching]
+" create a new fancy Files command with preview
+command! -bang -nargs=? -complete=dir RFiles
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+noremap <C-P>d <Esc><Esc>:RFiles %:p:h<CR>
+noremap <C-P>p <Esc><Esc>:Files<CR>
+noremap <C-P>b <Esc><Esc>:BLines<CR>
+noremap <C-P>g <Esc><Esc>:BCommits!<CR>
+" search in the directory of the open file
+
 " [misc]
 " Hide the highlighting when backspace is pressed
 noremap <Backspace> :noh<CR>
 " noremap <C-g> :bd<CR>
-noremap <Leader>w :w<CR>m
-noremap <Leader>r :vertical resize 32<CR>
-nnoremap <Leader>tt <Ctrl-w><Ctrl-]><Ctrl-w>T<CR>
+" noremap <Leader>w :w<CR>m
+noremap <Leader>nr :NERDTreeFocus <bar> vertical resize 32<CR>
+" nnoremap <Leader>tt <Ctrl-w><Ctrl-]><Ctrl-w>T<CR>
 nnoremap <Leader>q :tabclose<CR>
-nnoremap gb :bn<CR>
-nnoremap Gb :bp<CR>
+nnoremap gb :bnext<CR>
+nnoremap Gb :bprevious<CR>
+
+" Terminal shortcuts
+tnoremap <C-w>h <C-\><C-n><C-w>h
+tnoremap <C-w>j <C-\><C-n><C-w>j
+tnoremap <C-w>k <C-\><C-n><C-w>k
+tnoremap <C-w>l <C-\><C-n><C-w>l
 
 " Allow saving of files as sudo 
-" cmap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %
+
+" Reload nvim source and call PlugInstall!
+noremap <Leader>si :source $MYVIMRC <bar> PlugInstall!<CR>
+noremap <Leader>sr :source $MYVIMRC<CR>
+noremap <Leader>se :tabe $MYVIMRC<CR>
