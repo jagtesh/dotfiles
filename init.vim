@@ -9,6 +9,10 @@
 " auto-complete : kite
 " file searching: the-silver-searcher
  
+" ### PLUGIN SETTINGS ###
+" [polyglot]
+let g:polyglot_disabled = ['elixir', 'javascript']
+
 " automated plug installation on neovim
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
@@ -78,9 +82,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'tomasr/molokai'
-Plug 'beeender/Comrade'
+" Plug 'beeender/Comrade'
 Plug 'dense-analysis/ale'
-Plug 'Valloric/MatchTagAlways'
+" Plug 'Valloric/MatchTagAlways'
 " MatchTagAlways options
 let g:mta_filetypes = {
   \ 'html' : 1,
@@ -173,9 +177,6 @@ autocmd FileType make setlocal noexpandtab
 set foldmethod=syntax
 set nofoldenable
 
-" ### PLUGIN SETTINGS ###
-" [polyglot]
-let g:polyglot_disabled = ['elixir', 'javascript']
 " Enable JSX support in .js files
 let g:jsx_ext_required = 0
 "set foldlevelstart=20

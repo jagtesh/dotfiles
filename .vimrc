@@ -1,3 +1,5 @@
+" !!! ATTENTION: THIS FILE IS OLD AND NOT LONGER MAINTAINED. USE init.vim FOR
+" BOTH VIM AND NVIM
 " Get Plug first, run the following command:
 " (source: https://github.com/junegunn/vim-plug)
 "
