@@ -172,3 +172,4 @@ inoremap <C-k> <C-p>
  
 " Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
+set rtp+=/usr/local/opt/fzf
