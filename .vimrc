@@ -47,7 +47,7 @@ Plug 'rking/ag.vim'
 Plug 'tpope/vim-commentary' 
 Plug 'edkolev/tmuxline.vim'
 " Plug 'Valloric/MatchTagAlways'
-Plug 'elixir-lang/vim-elixir'
+" Plug 'elixir-lang/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'Shougo/neco-vim'
 Plug 'pangloss/vim-javascript'
@@ -56,9 +56,9 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 " Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'tomasr/molokai'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-compiler' }
 " Plug 'larrylv/ycm-elixir'
 
 " Disabled plugs

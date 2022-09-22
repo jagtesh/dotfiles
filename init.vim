@@ -35,7 +35,7 @@ Plug 'bling/vim-airline'
 " Enable tabline and make tweaks to vim-airline
 let g:airline_detect_paste = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 0 
 if g:airline_powerline_fonts == 0 " turns off fancy styles for powerline if enabled
   let g:airline#extensions#tabline#left_sep = ''
   let g:aurline#extensions#tabline#left_alt_sep = '|'
@@ -73,7 +73,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary' 
 Plug 'edkolev/tmuxline.vim'
 " Force tmuxline to not use icons
-let g:tmuxline_powerline_separators = 1
+let g:tmuxline_powerline_separators = 0
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'thinca/vim-ref'
@@ -82,7 +82,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'tomasr/molokai'
-Plug 'codota/tabnine-vim'
+" Plug 'codota/tabnine-vim'
 " Plug 'beeender/Comrade'
 Plug 'dense-analysis/ale'
 " Plug 'Valloric/MatchTagAlways'
