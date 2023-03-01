@@ -82,11 +82,19 @@ Plug 'pangloss/vim-javascript'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'tomasr/molokai'
-Plug 'codota/tabnine-vim'
 " Plug 'beeender/Comrade'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 " Plug 'Valloric/MatchTagAlways'
 " MatchTagAlways options
+
+" Install LSP support with nvim-cmp for auto-completion
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
 let g:mta_filetypes = {
   \ 'html' : 1,
   \ 'xhtml' : 1,
@@ -194,9 +202,11 @@ let g:rehash256 = 1
 set fillchars+=vert:\ 
 
 " [kite]
-let g:kite_supported_languages = ['python', 'javascript', 'go']
-let g:kite_tab_complete=1
+" let g:kite_supported_languages = ['python', 'javascript', 'go']
+" let g:kite_tab_complete=1
 
+" use omni completion provided by lsp
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " ===========================
 "           KEYMAPS
@@ -229,11 +239,14 @@ noremap <Leader>f :NERDTreeFind<CR>
 " create a new fancy Files command with preview
 command! -bang -nargs=? -complete=dir RFiles
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-noremap <C-P>d <Esc><Esc>:RFiles %:p:h<CR>
-noremap <C-P>p <Esc><Esc>:Files<CR>
-noremap <C-P>b <Esc><Esc>:BLines<CR>
-noremap <C-P>g <Esc><Esc>:BCommits!<CR>
+
+noremap <C-p> :Files<CR>
+noremap <C-p>b :BLines<CR>
+noremap <C-p>g :BCommits!<CR>
 " search in the directory of the open file
+noremap <C-p>d :RFiles %:p:h<CR>
+" only search through Git tracked files
+noremap <C-p>g :GFiles<CR>
 
 " [misc]
 " Hide the highlighting when backspace is pressed
@@ -259,3 +272,92 @@ cmap w!! w !sudo tee > /dev/null %
 noremap <Leader>si :source $MYVIMRC <bar> PlugInstall!<CR>
 noremap <Leader>sr :source $MYVIMRC<CR>
 noremap <Leader>se :tabe $MYVIMRC<CR>
+
+" ADD LSP SETTINGS IN THE LAST LINE
+" Screws up syntax highlighting if not last
+"
+" [LSP support]
+lua << EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig').pylsp.setup {
+    capabilities = capabilities,
+    settings = {
+      pycodestyle = {
+        ignore = {'W391', 'E203'},
+        maxLineLength = 88
+      }
+      -- pylsp = {
+      --  flake8 = {
+      --    enabled = false
+      --  }
+      --}
+    }
+  }
+EOF
+
+set completeopt=menu,menuone,noselect
+" set completeopt-=preview
