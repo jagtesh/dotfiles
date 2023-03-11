@@ -35,7 +35,7 @@ Plug 'bling/vim-airline'
 " Enable tabline and make tweaks to vim-airline
 let g:airline_detect_paste = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 0
 if g:airline_powerline_fonts == 0 " turns off fancy styles for powerline if enabled
   let g:airline#extensions#tabline#left_sep = ''
   let g:aurline#extensions#tabline#left_alt_sep = '|'
@@ -55,6 +55,8 @@ let g:NERDTreeUseSimpleIndicator = 0
 " Force NERDTree to change CWD in VIM when the tree root changes
 let g:NERDTreeWinSize = 32
 let g:NERDTreeChDirMode = 2
+let g:NERDTreeMapCustomOpen = 'oo'
+let g:NERDTreeMapOpenInTab = '<CR>'
 
 " # All things CtrlP and Ag (fzf replaces both plugins)
 " Plug 'kien/ctrlp.vim'
@@ -71,9 +73,9 @@ let g:NERDTreeChDirMode = 2
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary' 
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 " Force tmuxline to not use icons
-let g:tmuxline_powerline_separators = 1
+" let g:tmuxline_powerline_separators = 1
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'thinca/vim-ref'
@@ -86,6 +88,7 @@ Plug 'tomasr/molokai'
 " Plug 'dense-analysis/ale'
 " Plug 'Valloric/MatchTagAlways'
 " MatchTagAlways options
+Plug 'github/copilot.vim'
 
 " Install LSP support with nvim-cmp for auto-completion
 Plug 'neovim/nvim-lspconfig'
