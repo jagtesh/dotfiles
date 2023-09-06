@@ -55,8 +55,9 @@ let g:NERDTreeUseSimpleIndicator = 0
 " Force NERDTree to change CWD in VIM when the tree root changes
 let g:NERDTreeWinSize = 32
 let g:NERDTreeChDirMode = 2
-let g:NERDTreeMapCustomOpen = 'oo'
-let g:NERDTreeMapOpenInTab = '<CR>'
+" let g:NERDTreeMapCustomOpen = 'oo'
+" The following has issues when trying to select .. directory
+" let g:NERDTreeMapOpenInTab = '<CR>'
 
 " # All things CtrlP and Ag (fzf replaces both plugins)
 " Plug 'kien/ctrlp.vim'
