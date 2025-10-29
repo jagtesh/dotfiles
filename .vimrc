@@ -163,6 +163,10 @@ nnoremap <Leader>fb :CtrlPBuffer<CR>
 nnoremap <Leader>tt <Ctrl-w><Ctrl-]><Ctrl-w>T<CR>
 nnoremap <Leader>q :tabclose<CR>
 
+" Nice helpers for buffer navigation
+noremap gb :bn<CR>
+noremap gB :bp<CR>
+
 " Use jk/kj to quickly escape from insert mode, space at end keeps character
 " in same position
 inoremap jk <Esc> " extra space at end
@@ -173,3 +177,4 @@ inoremap <C-k> <C-p>
 " Allow saving of files as sudo 
 cmap w!! w !sudo tee > /dev/null %
 set rtp+=/usr/local/opt/fzf
+
